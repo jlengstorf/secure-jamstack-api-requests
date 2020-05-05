@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unsplash Photo Search</title>
+  </head>
+  <body>
+    <h1>
+      Securely Search Unsplash Using the Jamstack and Serverless Functions
+    </h1>
+
+    <!-- TODO add search form -->
+    <form class="search-form">
+      <label for="query">Search</label>
+      <input id="query" name="query" type="text" />
+      <button>Search</button>
+    </form>
+
+    <!-- TODO display results -->
+
+    <script>
+      const form = document.querySelector('.search-form');
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+
+        const response = await fetch('/.netlify/functions/unsplash-search', {
+          method: 'POST',
+          body: JSON.stringify({
+            query: formData.get('query'),
+          }),
+        })
+          .then((res) => res.json())
+          .catch((err) => console.error(err));
+
+        console.log(response);
+      });
+    </script>
+  </body>
+</html>

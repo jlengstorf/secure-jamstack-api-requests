@@ -1,0 +1,14 @@
+{
+  "name": "secure-jamstack-api-requests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "serve src"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serve": "^11.3.0"
+  }
+}
