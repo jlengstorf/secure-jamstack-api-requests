@@ -1,32 +1,25 @@
-exports.handler = (event) => {
+const fetch = require('node-fetch');
+
+exports.handler = async (event) => {
   const { query } = JSON.parse(event.body);
-  // var myHeaders = new Headers();
-  // myHeaders.append(
-  //   'Authorization',
-  //   'Client-ID '
-  // );
 
-  // var requestOptions = {
-  //   method: 'GET',
-  //   headers: myHeaders,
-  //   redirect: 'follow',
-  // };
-
-  // fetch(
-  //   `https://api.unsplash.com/search/photos?query=${formData.get(
-  //     'query'
-  //   )}`,
-  //   requestOptions
-  // )
-  //   .then((response) => response.text())
-  //   .then((result) => console.log(result))
-  //   .catch((error) => console.log('error', error));
+  const response = await fetch(
+    `https://api.unsplash.com/search/photos?query=${query}`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Client-ID ${process.env.UNSPLASH_API_TOKEN}`,
+      },
+    }
+  )
+    .then((response) => response.json())
+    .catch((error) => console.log('error', error));
 
   return {
     statusCode: 200,
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(`You searched for ${query}`),
+    body: JSON.stringify(response),
   };
 };

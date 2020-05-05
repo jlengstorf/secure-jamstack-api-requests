@@ -1,7 +1,7 @@
 [build]
   publish = "src"
   functions = "functions"
-  command = "# no build command"
+  command = "cd functions && npm i && cd .."
 
 [dev]
   publish = "src"
